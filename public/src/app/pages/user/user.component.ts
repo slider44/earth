@@ -69,6 +69,7 @@ export class UserComponent implements OnInit {
     this.id = id;
     
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width:"500px",
       data: {_id: id, firstName: firstName, lastName: lastName, contact: contact, email: email}
     });
 
@@ -87,6 +88,7 @@ export class UserComponent implements OnInit {
     // index row is used just for debugging proposes and can be removed
 
     const dialogRef = this.dialog.open(EditDialogComponent, {
+      width:"500px",
       data: {_id: id, firstName: firstName, lastName: lastName,contact: contact,  email: email}
     });
 
