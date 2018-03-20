@@ -48,7 +48,8 @@ export class UserComponent implements OnInit {
 
   addNew(user: EmployeeModel) {
     const dialogRef = this.dialog.open(AddDialogComponent, {
-      data: {issue: user }
+      width:"500px",
+      data: {issue: user}
    });
 
     dialogRef.afterClosed().subscribe(result => {
