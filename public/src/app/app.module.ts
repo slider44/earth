@@ -26,6 +26,8 @@ import { LeaveComponent } from './pages/leaves/leave.component';
 import { LoadingComponent } from './core/loading.component';
 import { CallbackComponent } from './pages/callback/callback.component';
 import { LeaveService } from './services/leave/leave.service';
+import { CryptoComponent } from './pages/crypto/crypto.component';
+import { CmcService } from './services/crypto/cmc.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { LeaveService } from './services/leave/leave.service';
     FooterComponent,
     LeaveComponent,
     LoadingComponent,
-    CallbackComponent
+    CallbackComponent,
+    CryptoComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ import { LeaveService } from './services/leave/leave.service';
     DeleteDialogComponent,
     EditDialogComponent
   ],
-  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService],
+  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService,CmcService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
