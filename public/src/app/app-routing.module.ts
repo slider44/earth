@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './pages/user/user.component';
 import { LeaveComponent } from './pages/leaves/leave.component';
+import { CallbackComponent } from './pages/callback/callback.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: '',
     component: LeaveComponent
+  },
+  {
+    path: 'callback',
+    component: CallbackComponent
   }
 
 ];

@@ -45,23 +45,71 @@ router.put("/users/:id",(req,res,next)=>{
     });
 });
 
-const _leaveListProjection = 'leaveType startDatetime endDatetime viewPublic';
+const _leaveListProjection = 'employeeId leaveType startDatetime endDatetime viewPublic';
 
 // GET list of leaves starting in the future
 router.get('/leaves', (req, res) => {
-    Event.find({viewPublic: true, startDatetime: { $gte: new Date() }}, _leaveListProjection, (err, leaves) => {
+    Leave.aggregate([
+        {
+           $lookup: {
+              from: "employees",
+              localField: "_id",    // field in the leave collection
+              foreignField: "employeeId",  // field in the employees collection
+              as: "fromEmployees"
+           }
+        }
+        /*{
+           $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$fromEmployees", 0 ] }, "$$ROOT" ] } }
+        },
+        { $project: { fromEmployees: 0 } }*/
+     ], function (err, result) {
+        console.log(result);
+     });
+
+
+  
+    /*Leave.find({viewPublic: true, startDatetime: { $gte: new Date() }}, _leaveListProjection, (err, leaves) => {
       let leavesArr = [];
       if (err) {
         return res.status(500).send({message: err.message});
       }
       if (leaves) {
-            leaves.forEach(event => {
-           leavesArr.push(leave);
+            leaves.forEach(leave => {
+            leavesArr.push(leave);
+        });
+      }
+      res.send(leavesArr);
+    });*/
+});
+
+/*router.get('/leaves', (req, res) => {
+  
+    Leave.find({viewPublic: true, startDatetime: { $gte: new Date() }}, _leaveListProjection, (err, leaves) => {
+      let leavesArr = [];
+      if (err) {
+        return res.status(500).send({message: err.message});
+      }
+      if (leaves) {
+            leaves.forEach(leave => {
+            leavesArr.push(leave);
         });
       }
       res.send(leavesArr);
     });
-});
+});*/
+
+// GET leave by leave ID
+router.get('/leaves/:id', (req, res) => {
+    Leave.findById(req.params.id, (err, leave) => {
+      if (err) {
+        return res.status(500).send({message: err.message});
+      }
+      if (!leave) {
+        return res.status(400).send({message: 'Leave not found.'});
+      }
+      res.send(leave);
+    });
+  });
 
 
 

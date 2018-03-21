@@ -14,7 +14,8 @@ const leaveSchema = new Schema ({
     startDatetime: { type: Date, required: true },
     endDatetime: { type: Date, required: true },
     description: String,
-    viewPublic: { type: Boolean, required: true }
+    viewPublic: { type: Boolean, required: true },
+    employeeId :  {type: String, required: true}
 });
 
 module.exports = mongoose.model('Leave', leaveSchema);

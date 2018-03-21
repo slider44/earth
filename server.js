@@ -28,6 +28,7 @@ app.set('port', port);
   */
 
 //const MONGO_URI = 'mongodb://localhost/usersSchema';
+
 const MONGO_URI = 'mongodb://db:password@ds245548.mlab.com:45548/mean-crypto'
 
 const mongoose = require('mongoose');

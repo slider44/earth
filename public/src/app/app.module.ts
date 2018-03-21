@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { DatePipe } from '@angular/common';
 import {HttpClientModule,HttpClient} from '@angular/common/http';
 import {
   MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule,
@@ -22,6 +23,9 @@ import { AddDialogComponent } from './pages/user/dialogs/add/add.dialog.componen
 import { DeleteDialogComponent } from './pages/user/dialogs/delete/delete.dialog.component';
 import { EditDialogComponent } from './pages/user/dialogs/edit/edit.dialog.component';
 import { LeaveComponent } from './pages/leaves/leave.component';
+import { LoadingComponent } from './core/loading.component';
+import { CallbackComponent } from './pages/callback/callback.component';
+import { LeaveService } from './services/leave/leave.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,9 @@ import { LeaveComponent } from './pages/leaves/leave.component';
     EditDialogComponent,
     HeaderComponent,
     FooterComponent,
-    LeaveComponent
+    LeaveComponent,
+    LoadingComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +62,7 @@ import { LeaveComponent } from './pages/leaves/leave.component';
     DeleteDialogComponent,
     EditDialogComponent
   ],
-  providers: [UserService,UtilsService,FilterSortService],
+  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
