@@ -18,9 +18,10 @@
                     [routerLink]="['/Leaves', leave._id]"
                     class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
-                        <h3 class="mb-1" [innerHTML]="leave.employeeId"> </h3>
-                        <h5 class="mb-1" [innerHTML]="leave.leaveType"> </h5>
-                        <small>{{utils.eventDates(leave.startDatetime, leave.endDatetime)}}</small>
+                        <p class="mb-1" [innerHTML]="leave.lastName"></p>
+                        <p class="mb-1" [innerHTML]="leave.firstName"></p>
+                        <p class="mb-1" [innerHTML]="leave.LeaveDetails.leaveType"></p>
+                        <small>{{utils.eventDates(leave.LeaveDetails.startDatetime, leave.LeaveDetails.endDatetime)}}</small>
                     </div>
                     </a>
                 </section>

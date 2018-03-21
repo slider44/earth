@@ -49,21 +49,31 @@ const _leaveListProjection = 'employeeId leaveType startDatetime endDatetime vie
 
 // GET list of leaves starting in the future
 router.get('/leaves', (req, res) => {
-    Leave.aggregate([
+    User.aggregate([
         {
            $lookup: {
-              from: "employees",
-              localField: "_id",    // field in the leave collection
-              foreignField: "employeeId",  // field in the employees collection
-              as: "fromEmployees"
+              from: "leaves",
+              localField: "_id",    // common field from collection 1
+              foreignField: "employeeID",  // common field from collection 2
+              as: "LeaveDetails" // alias for collection 2
            }
-        }
+        },
+        { $unwind: "$LeaveDetails"},
         /*{
            $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$fromEmployees", 0 ] }, "$$ROOT" ] } }
         },
         { $project: { fromEmployees: 0 } }*/
-     ], function (err, result) {
-        console.log(result);
+     ], function (err, leaves) {
+        let leavesArr = [];
+        if (err) {
+            return res.status(500).send({message: err.message});
+          }
+          if (leaves) {
+            leaves.forEach(leave => {
+            leavesArr.push(leave);
+        });
+      }
+      res.send(leavesArr);
      });
 
 
