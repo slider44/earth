@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 import {HttpClientModule,HttpClient} from '@angular/common/http';
 import {
   MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule,
-  MatTableModule, MatToolbarModule,
+  MatTableModule, MatToolbarModule,MatDividerModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -56,6 +56,7 @@ import { CmcService } from './services/crypto/cmc.service';
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
+    MatDividerModule,
     ReactiveFormsModule,
     ToastModule.forRoot(),
     AppRoutingModule

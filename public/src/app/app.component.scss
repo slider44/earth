@@ -25,10 +25,11 @@
 }
 .layout-view {
   padding: $padding-screen-small;
+  min-height: 650px;
 
   @include mq($large) {
     margin: 0 auto;
-    max-width: 960px;
+    max-width: 100%;
     padding: $padding-screen-large;
   }
 }
