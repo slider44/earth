@@ -5,6 +5,7 @@ import { LeaveModel } from '../../models/LeaveModel';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { EmployeeModel } from '../../models/EmployeeModel';
+import { catchError } from 'rxjs/operators/catchError';
 
 @Injectable()
 export class LeaveService {
@@ -14,14 +15,19 @@ export class LeaveService {
   constructor(private httpClient: HttpClient) { }
 
   // GET list of future leaves
+  
+  getEvents$(): Observable<LeaveModel[]> {
+    return this.httpClient
+      .get(this.API_URL)
+      .pipe(
+        catchError((error) => this._handleError(error))
+      );
+  }
 
-  /*getEvents$(): void {
-    this.httpClient.get<LeaveModel[]>(this.API_URL).subscribe(data => {
-        this.dataChange.next(data);
-      },
-      (error: HttpErrorResponse) => {
-      console.log (error.name + ' ' + error.message);
-      });
-  }*/
+  private _handleError(err: HttpErrorResponse | any): Observable<any> {
+    const errorMsg = err.message || 'Error: Unable to complete request.';
+   
+    return Observable.throw(errorMsg);
+  }
 
 }
