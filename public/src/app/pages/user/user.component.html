@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-        <span>Material Table</span>
+        <span>Teammates</span>
         <span class="spacer"></span>
         Reload data:
         <button mat-icon-button (click)="refresh()">
@@ -16,14 +16,14 @@
     </div>
 
     <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
-          <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+        <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
 
-          <!-- ID Column -->
-          <ng-container matColumnDef="_id">
-                <mat-header-cell *matHeaderCellDef mat-sort-header [style.display]="'none'">ID</mat-header-cell>
-                <mat-cell *matCellDef="let row" [style.display]="'none'"> {{row._id}}</mat-cell>
-            </ng-container>
+        <!-- ID Column -->
+        <ng-container matColumnDef="_id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header [style.display]="'none'">ID</mat-header-cell>
+            <mat-cell *matCellDef="let row" [style.display]="'none'"> {{row._id}}</mat-cell>
+        </ng-container>
 
         <ng-container matColumnDef="firstName">
             <mat-header-cell *matHeaderCellDef mat-sort-header>FIRST NAME</mat-header-cell>
