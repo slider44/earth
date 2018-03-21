@@ -1,0 +1,14 @@
+<table class="table table-hover">
+    <tr>
+        <th>Name</th>
+        <th>symbol</th>
+        <th>Price(USD)</th>
+        <th>%Change (24hr)</th>
+    </tr>
+    <tr *ngFor="let coin of coins | async">
+        <td>{{coin.name}}</td>
+        <td>{{coin.symbol}}</td>
+        <td>{{coin.price_usd}}</td>
+        <td>{{coin.percent_change_24h}} %</td>
+    </tr>
+</table>

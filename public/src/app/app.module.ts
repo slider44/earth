@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 import {HttpClientModule,HttpClient} from '@angular/common/http';
 import {
   MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule,
-  MatTableModule, MatToolbarModule,
+  MatTableModule, MatToolbarModule,MatDividerModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -26,6 +26,8 @@ import { LeaveComponent } from './pages/leaves/leave.component';
 import { LoadingComponent } from './core/loading.component';
 import { CallbackComponent } from './pages/callback/callback.component';
 import { LeaveService } from './services/leave/leave.service';
+import { CryptoComponent } from './pages/crypto/crypto.component';
+import { CmcService } from './services/crypto/cmc.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { LeaveService } from './services/leave/leave.service';
     FooterComponent,
     LeaveComponent,
     LoadingComponent,
-    CallbackComponent
+    CallbackComponent,
+    CryptoComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { LeaveService } from './services/leave/leave.service';
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
+    MatDividerModule,
     ReactiveFormsModule,
     ToastModule.forRoot(),
     AppRoutingModule
@@ -62,7 +66,7 @@ import { LeaveService } from './services/leave/leave.service';
     DeleteDialogComponent,
     EditDialogComponent
   ],
-  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService],
+  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService,CmcService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

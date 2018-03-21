@@ -25,7 +25,7 @@ import { EmployeeModel } from '../../models/EmployeeModel';
 
 export class UserComponent implements OnInit {
 
-  displayedColumns = ['_id', 'firstName', 'lastName',  'contact' , 'email', 'actions'];
+  displayedColumns = ['firstName', 'lastName',  'contact' , 'email', 'actions'];
   userDatabase: UserService | null;
   dataSource: UserDataSource | null;
   index: number;
