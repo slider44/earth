@@ -4,7 +4,7 @@
             <span>Teammates</span>
             <span class="spacer"></span>
             Reload data:
-            <button mat-icon-button (click)="refresh()">
+            <button mat-icon-button (click)="loadData()">
                 <mat-icon>refresh</mat-icon>
             </button>
         </mat-toolbar>
@@ -43,21 +43,22 @@
 
                 <ng-container matColumnDef="actions">
                     <mat-header-cell *matHeaderCellDef>
-                        <button mat-icon-button color="primary" (click)="addNew()">
-                        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-                    </button>
-                </mat-header-cell>
+                        <!--<button mat-icon-button color="primary" (click)="addNew()" matTooltip="Add User" matTooltipPosition="right">
+                            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                        </button>-->
+                        <button class="btn btn-primary btn-sm" (click)="addNew()" matTooltip="Add User" matTooltipPosition="right">
+                            <i class="fa fa-user-plus"></i>
+                        </button>
+                    </mat-header-cell>
 
-                <mat-cell *matCellDef="let row; let i=index;">
-                    <button mat-icon-button color="accent" (click)="startEdit(i, row._id, row.firstName, row.lastName, row.contact, row.email)">
-                        <mat-icon aria-label="Edit">edit</mat-icon>
-                    </button>
-                    
-                    <button mat-icon-button color="accent" (click)="deleteItem(i, row._id, row.firstName, row.lastName, row.contact,row.email)">
-                        <mat-icon aria-label="Delete">delete</mat-icon>
-                    </button>
-
-                </mat-cell>
+                    <mat-cell *matCellDef="let row; let i=index;">
+                        <button class="btn btn-primary btn-sm" (click)="startEdit(i, row._id, row.firstName, row.lastName, row.contact, row.email)" matTooltip="Edit User" matTooltipPosition="right">
+                            <i class="fa fa-user-circle"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteItem(i, row._id, row.firstName, row.lastName, row.contact,row.email)" matTooltip="Delete User" matTooltipPosition="right">
+                            <i class="fa fa-user-times"></i>
+                        </button>
+                    </mat-cell>
                 </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -75,16 +76,16 @@
     <div class = "col-md-4">
         <mat-toolbar color="primary">
             <span>Holdings</span>
-            <!--<span class="spacer"></span>
-            Reload data:
-            <button mat-icon-button (click)="refresh()">
-                <mat-icon>refresh</mat-icon>
-            </button>-->
         </mat-toolbar>
-            BTC
-            <mat-divider></mat-divider>
-            ETH
-            <mat-divider></mat-divider>
-            NEM
+        <button class="btn btn-sm btn-primary" (click) = "addTransactionDialog()" matTooltip="Add Transaction" matTooltipPosition="right" color="primary">
+            <i class="fa fa-plus"></i>
+        </button>
+        <table class="table">
+            <tr>
+                <td>Coin</td>
+                <td>Holding</td>
+                <td>Action</td>
+            </tr>
+        </table>
     </div>
 </div>

@@ -14,6 +14,7 @@ import { DeleteDialogComponent } from './dialogs/delete/delete.dialog.component'
 import { EditDialogComponent } from './dialogs/edit/edit.dialog.component';
 import { UserService } from '../../services/user/user.service';
 import { EmployeeModel } from '../../models/EmployeeModel';
+import { AddHoldingDialogComponent } from '../crypto/dialog/add-holding-dialog/add-holding-dialog.component';
 
 
 @Component({
@@ -44,6 +45,13 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+  }
+
+  addTransactionDialog(){
+    const dialogRef = this.dialog.open(AddHoldingDialogComponent, {
+      width:"300px"
+      //data: {issue: user}
+    });
   }
 
   addNew(user: EmployeeModel) {
