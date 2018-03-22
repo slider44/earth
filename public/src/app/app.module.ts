@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 import {HttpClientModule,HttpClient} from '@angular/common/http';
 import {
   MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule,
-  MatTableModule, MatToolbarModule,MatDividerModule
+  MatTableModule, MatToolbarModule,MatDividerModule,MatAutocompleteModule,MatTooltipModule,MatRadioModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -28,6 +28,7 @@ import { CallbackComponent } from './pages/callback/callback.component';
 import { LeaveService } from './services/leave/leave.service';
 import { CryptoComponent } from './pages/crypto/crypto.component';
 import { CmcService } from './services/crypto/cmc.service';
+import { AddHoldingDialogComponent } from './pages/crypto/dialog/add-holding-dialog/add-holding-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CmcService } from './services/crypto/cmc.service';
     LeaveComponent,
     LoadingComponent,
     CallbackComponent,
-    CryptoComponent
+    CryptoComponent,
+    AddHoldingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -56,15 +58,19 @@ import { CmcService } from './services/crypto/cmc.service';
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
+    MatAutocompleteModule,
     MatDividerModule,
+    MatTooltipModule,
     ReactiveFormsModule,
+    MatRadioModule,
     ToastModule.forRoot(),
     AppRoutingModule
   ],
   entryComponents: [
     AddDialogComponent,
     DeleteDialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    AddHoldingDialogComponent
   ],
   providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService,CmcService],
   bootstrap: [AppComponent]
