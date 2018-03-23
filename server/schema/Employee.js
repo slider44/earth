@@ -6,7 +6,6 @@ const empSchema = new Schema ({
     firstName: { type: String, required: true },
     email:{type:String, require:false},
     contact:{type:String, require:false}
-
 });
 
 module.exports = mongoose.model('Employee', empSchema);

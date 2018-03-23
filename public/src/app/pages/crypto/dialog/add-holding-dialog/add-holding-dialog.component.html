@@ -1,0 +1,33 @@
+<div class="container">
+  <h3 mat-dialog-title>Add Transaction</h3>
+  <form (ngSubmit)="submit" #formControl="ngForm">
+    <mat-dialog-content>
+      <mat-form-field color="primary" class="input-full-width">
+        <input matInput placeholder="Coin"name="coin" [matAutocomplete]="auto" [formControl]="coinCtrl">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.name">
+            <span>{{ state.name }}</span> 
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-radio-group name="type">
+        <mat-radio-button  value="buy">
+          Buy
+        </mat-radio-button>
+        <mat-radio-button value="sell">
+          Sell
+        </mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field color="primary" class="input-full-width">
+        <input matInput placeholder="Price" name="price">
+      </mat-form-field>
+      <mat-form-field color="primary" class="input-full-width">
+        <input matInput placeholder="Qty" name="qty">
+      </mat-form-field>
+    </mat-dialog-content>
+    <div mat-dialog-actions>
+      <button color="primary" mat-raised-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()"><i class="fa fa-save"></i> Save</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1"><i class="fa fa-ban"></i> Cancel</button>
+    </div>
+  </form>
+</div>

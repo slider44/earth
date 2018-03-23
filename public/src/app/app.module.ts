@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 import {HttpClientModule,HttpClient} from '@angular/common/http';
 import {
   MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule,
-  MatTableModule, MatToolbarModule,
+  MatTableModule, MatToolbarModule,MatDividerModule,MatAutocompleteModule,MatTooltipModule,MatRadioModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -26,6 +26,9 @@ import { LeaveComponent } from './pages/leaves/leave.component';
 import { LoadingComponent } from './core/loading.component';
 import { CallbackComponent } from './pages/callback/callback.component';
 import { LeaveService } from './services/leave/leave.service';
+import { CryptoComponent } from './pages/crypto/crypto.component';
+import { CmcService } from './services/crypto/cmc.service';
+import { AddHoldingDialogComponent } from './pages/crypto/dialog/add-holding-dialog/add-holding-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { LeaveService } from './services/leave/leave.service';
     FooterComponent,
     LeaveComponent,
     LoadingComponent,
-    CallbackComponent
+    CallbackComponent,
+    CryptoComponent,
+    AddHoldingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,16 +58,21 @@ import { LeaveService } from './services/leave/leave.service';
     MatTableModule,
     MatToolbarModule,
     MatPaginatorModule,
+    MatAutocompleteModule,
+    MatDividerModule,
+    MatTooltipModule,
     ReactiveFormsModule,
+    MatRadioModule,
     ToastModule.forRoot(),
     AppRoutingModule
   ],
   entryComponents: [
     AddDialogComponent,
     DeleteDialogComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    AddHoldingDialogComponent
   ],
-  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService],
+  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService,CmcService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
