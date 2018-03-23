@@ -4,6 +4,7 @@ import {MatDialog, MatPaginator, MatSort} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
 import {DataSource} from '@angular/cdk/collections';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { FormControl, Validators } from '@angular/forms';
 //import {Observable} from 'rxjs/Observable';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/observable/merge';
@@ -82,11 +83,31 @@ export class UserComponent implements OnInit {
       }
     });
   }
+/* 
+  getErrorMessage(firstName: FormControl, lastName: FormControl, contact : FormControl, email : FormControl ) {
+
+    if (firstName.hasError('required'))
+      return "Required: please enter valid First Name";
+
+    if (lastName.hasError('required'))
+      return "Required: please enter valid Last Name";
+
+    if (contact.hasError('pattern'))
+      return "Required: please enter valid contact number";
+
+    if (email.hasError('required') || email.hasError('email'))
+      return "Required: please enter valid Email";
+  }
+
+  hasErrors(firstName: FormControl, lastName: FormControl, contact : FormControl, email : FormControl ) {
+    if (firstName.valid && lastName.valid  && contact && email.valid) return false;
+    return true;
+  } */
 
   startEdit(i: number, id: string, firstName: string, lastName: string, contact: string, email: string) {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
-
+    
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width:"500px",
       data: {_id: id, firstName: firstName, lastName: lastName,contact: contact,  email: email}

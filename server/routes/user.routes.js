@@ -66,6 +66,14 @@ router.get('/leaves', (req, res) => {
         console.log(result);
      });
 
+router.post("/users/:firstName",(req, res, next)=> {
+    
+    User.find([{first_name:req.params.first_name}],(err, data)=>{
+        if(err) return res.json(err)
+        else return res.json(data)
+    });
+
+});
 
   
     /*Leave.find({viewPublic: true, startDatetime: { $gte: new Date() }}, _leaveListProjection, (err, leaves) => {
@@ -108,6 +116,8 @@ router.get('/leaves/:id', (req, res) => {
         return res.status(400).send({message: 'Leave not found.'});
       }
       res.send(leave);
+
+    
     });
   });
 

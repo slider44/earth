@@ -1,24 +1,27 @@
 
 <h3 mat-dialog-title>Add new User</h3>
   
-  <form (ngSubmit)="submit" #formControl="ngForm">
+  <form (ngSubmit)="submit" #formControl="ngForm" >
     <mat-dialog-content>
+        <mat-error *ngIf="firstName.invalid || email.invalid || lastName.invalid || contact.invalid">{{getErrorMessage()}}</mat-error>
       <mat-form-field color="accent" class="input-full-width">
-        <input matInput placeholder="First Name" [(ngModel)]="user.firstName" name="firstName">
+        <input matInput placeholder="First Name" [(ngModel)]="user.firstName" name="firstName" [formControl]="firstName" required>
+       
       </mat-form-field>
       <mat-form-field color="accent" class="input-full-width">
-        <input matInput placeholder="Last Name" [(ngModel)]="user.lastName" name="lastName">
+        <input matInput placeholder="Last Name" [(ngModel)]="user.lastName" name="lastName" [formControl]="lastName" required>
       </mat-form-field>
       <mat-form-field color="accent" class="input-full-width">
-        <input matInput placeholder="Contact" [(ngModel)]="user.contact" name="contact">
+        <input matInput placeholder="Contact" [(ngModel)]="user.contact" name="contact" [formControl]="contact" required>
       </mat-form-field>
       <mat-form-field color="accent" class="input-full-width">
-        <input matInput placeholder="Email" [(ngModel)]="user.email" name="email">
+        <input matInput placeholder="Email" [(ngModel)]="user.email" name="email" [formControl]="email" required>
+      
       </mat-form-field>
   </mat-dialog-content>
     <div mat-dialog-actions>
-      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
-      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+      <button mat-raised-button color="primary" [type]="submit" [disabled]="hasErrors()" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+      <button mat-raised-button color="warn"  (click)="onNoClick()" tabindex="-1">Cancel</button>
     </div>
   </form>
   

@@ -6,6 +6,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { EmployeeModel } from '../../models/EmployeeModel';
+import { isEmpty } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -73,5 +74,16 @@ export class UserService {
     );
   }
 
+  //check if contact num already exists
 
+  checkUserExists (user : EmployeeModel): void {
+    this.httpClient.get(this.API_URL+ "/"+user.firstName).subscribe(data => {
+      console.log("data in checkuser: " );
+    },
+    (err: HttpErrorResponse) => {
+     // this.toasterService.showToaster('Error occurred. Details: ' + err.name + ' ' + err.message, 8000);
+    }
+  
+  );
+  }
 }
