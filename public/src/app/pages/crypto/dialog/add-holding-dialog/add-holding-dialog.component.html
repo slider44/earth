@@ -3,7 +3,12 @@
   <form (ngSubmit)="submit" #formControl="ngForm">
     <mat-dialog-content>
       <mat-form-field color="primary" class="input-full-width">
-        <input matInput placeholder="Coin"name="coin">
+        <input matInput placeholder="Coin"name="coin" [matAutocomplete]="auto" [formControl]="coinCtrl">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.name">
+            <span>{{ state.name }}</span> 
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
       <mat-radio-group name="type">
         <mat-radio-button  value="buy">

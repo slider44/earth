@@ -52,7 +52,7 @@
                     </mat-header-cell>
 
                     <mat-cell *matCellDef="let row; let i=index;">
-                        <button class="btn btn-primary btn-sm" (click)="startEdit(i, row._id, row.firstName, row.lastName, row.contact, row.email)" matTooltip="Edit User" matTooltipPosition="right">
+                        <button class="btn btn-primary btn-sm" (click)="startEdit(i, row._id, row.firstName, row.lastName, row.contact, row.email)" matTooltip="Edit User" matTooltipPosition="left">
                             <i class="fa fa-user-circle"></i>
                         </button>
                         <button class="btn btn-danger btn-sm" (click)="deleteItem(i, row._id, row.firstName, row.lastName, row.contact,row.email)" matTooltip="Delete User" matTooltipPosition="right">
