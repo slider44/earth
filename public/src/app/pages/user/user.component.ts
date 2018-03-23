@@ -53,6 +53,9 @@ export class UserComponent implements OnInit {
       width:"300px"
       //data: {issue: user}
     });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   addNew(user: EmployeeModel) {
