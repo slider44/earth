@@ -4,6 +4,7 @@ const router = express.Router();
 
 const User = require('../schema/Employee');
 const Leave = require('../schema/Leave');
+const Transaction = require('../schema/Transaction');
 
 router.get("/users", (req, res, next) => {
     
@@ -122,5 +123,13 @@ router.get('/leaves/:id', (req, res) => {
   });
 
 
+router.post("/transactions",(req,res,next)=>{
+    console.log("Server > POST '/transactions' ", req.body);
+    delete req.body._id
+    User.create(req.body,(err,transaction)=>{
+        if(err) return res.json(err)
+        else return res.json(transaction)
+    });
+});
 
 module.exports = router;
