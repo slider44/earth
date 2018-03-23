@@ -29,7 +29,7 @@ import { LeaveService } from './services/leave/leave.service';
 import { CryptoComponent } from './pages/crypto/crypto.component';
 import { CmcService } from './services/crypto/cmc.service';
 import { AddHoldingDialogComponent } from './pages/crypto/dialog/add-holding-dialog/add-holding-dialog.component';
-
+import { TopNavigationComponent } from './navigation/top-navigation/top-navigation.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +43,8 @@ import { AddHoldingDialogComponent } from './pages/crypto/dialog/add-holding-dia
     LoadingComponent,
     CallbackComponent,
     CryptoComponent,
-    AddHoldingDialogComponent
+    AddHoldingDialogComponent,
+    TopNavigationComponent
   ],
   imports: [
     BrowserModule,

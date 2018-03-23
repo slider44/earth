@@ -23,6 +23,15 @@ export class LeaveService {
         catchError((error) => this._handleError(error))
       );
   }
+  /*getEventById$(id: string): Observable<LeaveModel> {
+    return this.httpClient
+      .get(this.API_URL + '/' + )
+      .pipe(
+        catchError((error) => this._handleError(error))
+      );
+  }*/
+
+   
 
   private _handleError(err: HttpErrorResponse | any): Observable<any> {
     const errorMsg = err.message || 'Error: Unable to complete request.';

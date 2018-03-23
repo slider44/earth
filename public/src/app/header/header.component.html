@@ -5,24 +5,37 @@
       <h1 class="header-page-siteTitle">
         <a routerLink="/">Springboard</a>
       </h1>
-    </div>
+    
+  
+</div>
   
     <nav id="nav" class="nav" role="navigation">
-      <ul class="nav-list">
-        <li>
-          <a
-            routerLink="/user"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">Teammates</a>
-        </li>
-      </ul>
-      <ul class="nav-list">
-        <li>
-          <a
-            routerLink="/crypto"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">Cryptocurrency</a>
-        </li>
-      </ul>
+        <div class="sidebar-fixed position-fixed">
+
+            <a class="logo-wrapper waves-effect">
+                <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt="">
+            </a>
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item active waves-effect">
+                    <i class="fa fa-pie-chart mr-3"></i>Dashboard
+                </a>
+
+                <a class="list-group-item list-group-item-action waves-effect"  routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <i class="fa fa-user mr-3"></i>Profile</a>
+
+                <a href="#" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-table mr-3"></i>Tables</a>
+
+                <a href="#" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-map mr-3"></i>Maps</a>
+                <a href="#" class="list-group-item list-group-item-action waves-effect" routerLink="/crypto" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <i class="fa fa-money mr-3"></i>Crypto</a>
+
+
+              
+            </div>
+          
+        </div>
+    
     </nav>
   </header>

@@ -60,10 +60,7 @@ router.get('/leaves', (req, res) => {
            }
         },
         { $unwind: "$LeaveDetails"},
-        /*{
-           $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$fromEmployees", 0 ] }, "$$ROOT" ] } }
-        },
-        { $project: { fromEmployees: 0 } }*/
+       
      ], function (err, leaves) {
         let leavesArr = [];
         if (err) {
@@ -78,39 +75,12 @@ router.get('/leaves', (req, res) => {
      });
 
 
-  
-    /*Leave.find({viewPublic: true, startDatetime: { $gte: new Date() }}, _leaveListProjection, (err, leaves) => {
-      let leavesArr = [];
-      if (err) {
-        return res.status(500).send({message: err.message});
-      }
-      if (leaves) {
-            leaves.forEach(leave => {
-            leavesArr.push(leave);
-        });
-      }
-      res.send(leavesArr);
-    });*/
 });
 
-/*router.get('/leaves', (req, res) => {
-  
-    Leave.find({viewPublic: true, startDatetime: { $gte: new Date() }}, _leaveListProjection, (err, leaves) => {
-      let leavesArr = [];
-      if (err) {
-        return res.status(500).send({message: err.message});
-      }
-      if (leaves) {
-            leaves.forEach(leave => {
-            leavesArr.push(leave);
-        });
-      }
-      res.send(leavesArr);
-    });
-});*/
+
 
 // GET leave by leave ID
-router.get('/leaves/:id', (req, res) => {
+router.get('/leaves/:_id', (req, res) => {
     Leave.findById(req.params.id, (err, leave) => {
       if (err) {
         return res.status(500).send({message: err.message});
