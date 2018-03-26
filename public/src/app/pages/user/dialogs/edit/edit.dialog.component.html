@@ -2,7 +2,7 @@
     <h3 mat-dialog-title>Edit User</h3>
     <form (ngSubmit)="submit" #formControl="ngForm">
       <mat-dialog-content>
-          <mat-error *ngIf="firstName.invalid || email.invalid || lastName.invalid || contact.invalid">{{getErrorMessage()}}</mat-error>
+          <!--<mat-error *ngIf="firstName.invalid || email.invalid || lastName.invalid || contact.invalid">{{getErrorMessage()}}</mat-error>-->
         <mat-form-field class="input-full-width" color="accent">
           <input matInput placeholder="First Name" [(ngModel)]="data.firstName" name="firstName" required>
         </mat-form-field>
@@ -17,7 +17,7 @@
         </mat-form-field>
       </mat-dialog-content>      
       <div mat-dialog-actions>
-        <button mat-button [type]="submit" [disabled]="hasErrors()" mat-raised-button color="primary" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
+        <button mat-button [type]="submit" mat-raised-button color="primary" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
         <button mat-button (click)="onNoClick()" mat-raised-button color="warn" tabindex="-1">Cancel</button>
       </div>
     </form>
