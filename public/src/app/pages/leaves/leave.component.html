@@ -1,3 +1,4 @@
+
 <h1 class="text-center">{{pageTitle}}</h1>
 <app-loading *ngIf="loading"></app-loading>
 
@@ -21,7 +22,6 @@
                     
                         <div class="d-flex w-100 justify-content-between">
                             <a  [routerLink]="['/Leaves', leave._id]">
-                                <!--<h5 class="mb-1" [innerHTML]="leave.LeaveDetails.leaveType"></h5>-->
                                 <h5 class="mb-1">{{leave.LeaveDetails.leaveType}} - {{leave.firstName}}</h5>
                             </a>
 
