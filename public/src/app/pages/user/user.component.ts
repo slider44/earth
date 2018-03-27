@@ -15,7 +15,9 @@ import { DeleteDialogComponent } from './dialogs/delete/delete.dialog.component'
 import { EditDialogComponent } from './dialogs/edit/edit.dialog.component';
 import { UserService } from '../../services/user/user.service';
 import { EmployeeModel } from '../../models/EmployeeModel';
+import { TransactionService } from '../../services/crypto/transaction.service';
 import { AddHoldingDialogComponent } from '../crypto/dialog/add-holding-dialog/add-holding-dialog.component';
+import { Transaction } from '../../models/transaction';
 
 
 @Component({
@@ -32,13 +34,15 @@ export class UserComponent implements OnInit {
   dataSource: UserDataSource | null;
   index: number;
   id: string;
+  selectedUserId: string;
 
   users:Array<EmployeeModel> = [];
   
 
   constructor(public httpClient: HttpClient,
     public dialog: MatDialog,
-    private _userService: UserService) { }
+    private _userService: UserService,
+    private _transactionService: TransactionService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -48,13 +52,24 @@ export class UserComponent implements OnInit {
     this.loadData();
   }
 
+  holdings(user:EmployeeModel){
+    this.selectedUserId = user._id;
+    console.log(this.selectedUserId);
+  }
+
+  /*getTransaction(){
+    this. this._transactionService.getTransaction();
+  }*/
+
   addTransactionDialog(){
     const dialogRef = this.dialog.open(AddHoldingDialogComponent, {
-      width:"300px"
-      //data: {issue: user}
+      width:"300px",
+      data: {user: "user"}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result != null){
+        this._transactionService.addTransaction(result);
+      }
     });
   }
 

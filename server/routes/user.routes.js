@@ -104,11 +104,34 @@ router.get('/leaves/:_id', (req, res) => {
 
 
 router.post("/transactions",(req,res,next)=>{
-    console.log("Server > POST '/transactions' ", req.body);
+    //console.log("Server > POST '/transactions' ", req.body);
     delete req.body._id
-    User.create(req.body,(err,transaction)=>{
-        if(err) return res.json(err)
-        else return res.json(transaction)
+    Transaction.create(req.body,(err,transaction)=>{
+        if(err)
+        {
+            console.log(err);
+            return res.json(err)
+        } 
+        else{
+            console.log(res);
+            return res.json(transaction)   
+        }
+    });
+});
+
+router.get("/employeeTx/:userId", (req, res, next) => {
+    
+    Transaction.find({
+        employeeId: req.body.employeeId
+    }, (err, transaction)=>{
+
+        if(err) {
+            res.json(err);
+        }
+        else {
+            return res.json(transaction);
+            console.log(res.json(transaction));
+        }
     });
 });
 
