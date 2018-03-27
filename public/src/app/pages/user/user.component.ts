@@ -64,7 +64,7 @@ export class UserComponent implements OnInit {
   addTransactionDialog(){
     const dialogRef = this.dialog.open(AddHoldingDialogComponent, {
       width:"300px",
-      data: {user: "user"}
+      data: {userId: this.selectedUserId}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null){
