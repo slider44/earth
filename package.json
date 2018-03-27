@@ -9,10 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ngrx/devtools": "^1.4.0",
+    "@ngrx/store": "^5.2.0",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "g": "^2.0.1",
     "jquery": "^3.3.1",
     "mongoose": "^5.0.2",
     "morgan": "^1.9.0",
