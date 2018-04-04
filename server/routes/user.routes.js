@@ -119,10 +119,10 @@ router.post("/transactions",(req,res,next)=>{
     });
 });
 
-router.get("/employeeTx/:userId", (req, res, next) => {
+router.get("/transactions/:userId", (req, res, next) => {
     
     Transaction.find({
-        employeeId: req.body.employeeId
+        userID: req.params.userId
     }, (err, transaction)=>{
 
         if(err) {

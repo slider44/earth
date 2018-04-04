@@ -2,6 +2,8 @@ import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Transaction } from '../../models/transaction';
 import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class TransactionService {
@@ -14,7 +16,7 @@ export class TransactionService {
 
   addTransaction(transaction: Transaction): void{
     this._httpClient.post(this.API_URL + "/" , transaction).subscribe(data => {
-      this.dialogData = transaction;
+      //this.dialogData = transaction;
      //console.log("success");
       },
       (err: HttpErrorResponse) => {
@@ -23,13 +25,16 @@ export class TransactionService {
     });
   }
 
-  getTransaction(userId) : void{
-    this._httpClient.get<Transaction[]>(this.API_URL+"/employeeTx/",userId).subscribe(data => {
-      //this.dataChange.next(data);
-    },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+  getTransaction(userId) :Observable<Transaction[]>{
+    return this._httpClient
+    .get(this.API_URL+"/"+userId)
+    .pipe(
+      catchError((error) => this._handleError(error))
+    );
   }
-
+  private _handleError(err: HttpErrorResponse | any): Observable<any> {
+    const errorMsg = err.message || 'Error: Unable to complete request.';
+   
+    return Observable.throw(errorMsg);
+  }
 }

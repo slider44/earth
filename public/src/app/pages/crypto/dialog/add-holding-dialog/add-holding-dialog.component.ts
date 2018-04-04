@@ -27,7 +27,6 @@ export class AddHoldingDialogComponent implements OnInit {
   }
 
   addHolding(){
-    this.transaction.userID = this.data.userID;
     this.dialogRef.close(this.transaction);
   }
 

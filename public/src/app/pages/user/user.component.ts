@@ -18,6 +18,7 @@ import { EmployeeModel } from '../../models/EmployeeModel';
 import { TransactionService } from '../../services/crypto/transaction.service';
 import { AddHoldingDialogComponent } from '../crypto/dialog/add-holding-dialog/add-holding-dialog.component';
 import { Transaction } from '../../models/transaction';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -37,7 +38,9 @@ export class UserComponent implements OnInit {
   selectedUserId: string;
 
   users:Array<EmployeeModel> = [];
-  
+
+  transactionListSub: Subscription;
+  transactionList: Transaction[];
 
   constructor(public httpClient: HttpClient,
     public dialog: MatDialog,
@@ -55,19 +58,25 @@ export class UserComponent implements OnInit {
   holdings(user:EmployeeModel){
     this.selectedUserId = user._id;
     console.log(this.selectedUserId);
-  }
+    this.transactionListSub = this._transactionService.getTransaction(this.selectedUserId)
+    .subscribe(res=> { this.transactionList = res; 
+      console.log(res)
+    }, 
+      err=> {
+        console.error(err);
+      }
 
-  /*getTransaction(){
-    this. this._transactionService.getTransaction();
-  }*/
+    );
+  }
 
   addTransactionDialog(){
     const dialogRef = this.dialog.open(AddHoldingDialogComponent, {
       width:"300px",
-      data: {userId: this.selectedUserId}
+      data: {}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null){
+        result.userID = this.selectedUserId;
         this._transactionService.addTransaction(result);
       }
     });
