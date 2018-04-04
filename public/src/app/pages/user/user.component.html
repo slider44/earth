@@ -43,20 +43,19 @@
 
                 <ng-container matColumnDef="actions">
                     <mat-header-cell *matHeaderCellDef>
-                        <!--<button mat-icon-button color="primary" (click)="addNew()" matTooltip="Add User" matTooltipPosition="right">
-                            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-                        </button>-->
                         <button class="btn btn-primary btn-sm" (click)="addNew()" matTooltip="Add User" matTooltipPosition="right">
                             <i class="fa fa-user-plus"></i>
                         </button>
                     </mat-header-cell>
-
                     <mat-cell *matCellDef="let row; let i=index;">
-                        <button class="btn btn-primary btn-sm" (click)="startEdit(i, row._id, row.firstName, row.lastName, row.contact, row.email)" matTooltip="Edit User" matTooltipPosition="left">
+                        <button class="btn btn-primary btn-sm" (click)="startEdit(i, row._id, row.firstName, row.lastName, row.contact, row.email)" matTooltip="Edit User" matTooltipPosition="above">
                             <i class="fa fa-user-circle"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm" (click)="deleteItem(i, row._id, row.firstName, row.lastName, row.contact,row.email)" matTooltip="Delete User" matTooltipPosition="right">
+                        <button class="btn btn-danger btn-sm" (click)="deleteItem(i, row._id, row.firstName, row.lastName, row.contact,row.email)" matTooltip="Delete User" matTooltipPosition="above">
                             <i class="fa fa-user-times"></i>
+                        </button>
+                        <button class="bt btn-warning btn-sm" (click)="holdings(row)" matTooltip="Crypto Holdings" matTooltipPosition="above">
+                            <i class="fa fa-info"></i>
                         </button>
                     </mat-cell>
                 </ng-container>
@@ -88,4 +87,5 @@
             </tr>
         </table>
     </div>
+        
 </div>

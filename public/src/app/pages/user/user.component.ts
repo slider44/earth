@@ -15,7 +15,10 @@ import { DeleteDialogComponent } from './dialogs/delete/delete.dialog.component'
 import { EditDialogComponent } from './dialogs/edit/edit.dialog.component';
 import { UserService } from '../../services/user/user.service';
 import { EmployeeModel } from '../../models/EmployeeModel';
+import { TransactionService } from '../../services/crypto/transaction.service';
 import { AddHoldingDialogComponent } from '../crypto/dialog/add-holding-dialog/add-holding-dialog.component';
+import { Transaction } from '../../models/transaction';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -32,13 +35,17 @@ export class UserComponent implements OnInit {
   dataSource: UserDataSource | null;
   index: number;
   id: string;
+  selectedUserId: string;
 
   users:Array<EmployeeModel> = [];
-  
+
+  transactionListSub: Subscription;
+  transactionList: Transaction[];
 
   constructor(public httpClient: HttpClient,
     public dialog: MatDialog,
-    private _userService: UserService) { }
+    private _userService: UserService,
+    private _transactionService: TransactionService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -48,10 +55,30 @@ export class UserComponent implements OnInit {
     this.loadData();
   }
 
+  holdings(user:EmployeeModel){
+    this.selectedUserId = user._id;
+    console.log(this.selectedUserId);
+    this.transactionListSub = this._transactionService.getTransaction(this.selectedUserId)
+    .subscribe(res=> { this.transactionList = res; 
+      console.log(res)
+    }, 
+      err=> {
+        console.error(err);
+      }
+
+    );
+  }
+
   addTransactionDialog(){
     const dialogRef = this.dialog.open(AddHoldingDialogComponent, {
-      width:"300px"
-      //data: {issue: user}
+      width:"300px",
+      data: {}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result != null){
+        result.userID = this.selectedUserId;
+        this._transactionService.addTransaction(result);
+      }
     });
   }
 

@@ -5,7 +5,7 @@ import { DatePipe } from '@angular/common';
 import {HttpClientModule,HttpClient} from '@angular/common/http';
 import {
   MatButtonModule, MatDialogModule, MatIconModule, MatInputModule, MatPaginatorModule, MatSortModule,
-  MatTableModule, MatToolbarModule,MatDividerModule,MatAutocompleteModule,MatTooltipModule,MatRadioModule
+  MatTableModule, MatToolbarModule,MatDividerModule,MatAutocompleteModule,MatTooltipModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -30,6 +30,7 @@ import { CryptoComponent } from './pages/crypto/crypto.component';
 import { CmcService } from './services/crypto/cmc.service';
 import { AddHoldingDialogComponent } from './pages/crypto/dialog/add-holding-dialog/add-holding-dialog.component';
 import { TopNavigationComponent } from './navigation/top-navigation/top-navigation.component';
+import { TransactionService } from './services/crypto/transaction.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,8 +59,10 @@ import { TopNavigationComponent } from './navigation/top-navigation/top-navigati
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatAutocompleteModule,
+    MatDatepickerModule,
     MatDividerModule,
     MatTooltipModule,
     ReactiveFormsModule,
@@ -73,7 +76,7 @@ import { TopNavigationComponent } from './navigation/top-navigation/top-navigati
     EditDialogComponent,
     AddHoldingDialogComponent
   ],
-  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService,CmcService],
+  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService,CmcService, TransactionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

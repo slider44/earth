@@ -1,16 +1,11 @@
 <div class="container">
   <h3 mat-dialog-title>Add Transaction</h3>
-  <form (ngSubmit)="submit" #formControl="ngForm">
+  <form (ngSubmit)="addHolding()" #formControl="ngForm">
     <mat-dialog-content>
       <mat-form-field color="primary" class="input-full-width">
-        <input matInput placeholder="Coin"name="coin" [matAutocomplete]="auto" [formControl]="coinCtrl">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.name">
-            <span>{{ state.name }}</span> 
-          </mat-option>
-        </mat-autocomplete>
+        <input matInput placeholder="Coin"name="coin" [(ngModel)]="transaction.coin">
       </mat-form-field>
-      <mat-radio-group name="type">
+      <mat-radio-group name="type" [(ngModel)]="transaction.type_trans">
         <mat-radio-button  value="buy">
           Buy
         </mat-radio-button>
@@ -19,14 +14,19 @@
         </mat-radio-button>
       </mat-radio-group>
       <mat-form-field color="primary" class="input-full-width">
-        <input matInput placeholder="Price" name="price">
+        <input matInput placeholder="Price" name="price" [(ngModel)]="transaction.price">
       </mat-form-field>
       <mat-form-field color="primary" class="input-full-width">
-        <input matInput placeholder="Qty" name="qty">
+        <input matInput placeholder="Qty" name="qty" [(ngModel)]="transaction.qty">
+      </mat-form-field>
+      <mat-form-field color="primary" class="input-full-width">
+        <input matInput [matDatepicker]="picker1" placeholder="Transaction Date" [(ngModel)]="transaction.time_stamp" [ngModelOptions]="{standalone: true}">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
     </mat-dialog-content>
     <div mat-dialog-actions>
-      <button color="primary" mat-raised-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()"><i class="fa fa-save"></i> Save</button>
+      <button color="primary" mat-raised-button type="submit"><i class="fa fa-save"></i> Save</button>
       <button mat-button (click)="onNoClick()" tabindex="-1"><i class="fa fa-ban"></i> Cancel</button>
     </div>
   </form>
