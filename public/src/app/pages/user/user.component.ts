@@ -31,6 +31,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class UserComponent implements OnInit {
 
   displayedColumns = ['firstName', 'lastName',  'contact' , 'email', 'actions'];
+  displayedtransColumns=["coin", "holdings", "price", "action"];
   userDatabase: UserService | null;
   dataSource: UserDataSource | null;
   index: number;
@@ -40,7 +41,7 @@ export class UserComponent implements OnInit {
   users:Array<EmployeeModel> = [];
 
   transactionListSub: Subscription;
-  transactionList: Transaction[];
+  transactionList: Observable<any>;
 
   constructor(public httpClient: HttpClient,
     public dialog: MatDialog,
@@ -55,12 +56,11 @@ export class UserComponent implements OnInit {
     this.loadData();
   }
 
-  holdings(user:EmployeeModel){
-    this.selectedUserId = user._id;
-    console.log(this.selectedUserId);
+  holdings(userId){
+    this.selectedUserId = userId;
     this.transactionListSub = this._transactionService.getTransaction(this.selectedUserId)
     .subscribe(res=> { this.transactionList = res; 
-      console.log(res)
+      console.log(this.transactionList)
     }, 
       err=> {
         console.error(err);
@@ -78,6 +78,7 @@ export class UserComponent implements OnInit {
       if (result != null){
         result.userID = this.selectedUserId;
         this._transactionService.addTransaction(result);
+        this.holdings(this.selectedUserId);
       }
     });
   }

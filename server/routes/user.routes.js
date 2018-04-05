@@ -135,4 +135,30 @@ router.get("/transactions/:userId", (req, res, next) => {
     });
 });
 
+router.get("/transactions/count/:userId",(req, res,next) => {
+    Transaction.aggregate([
+        {
+            $match:{
+                userID:req.params.userId
+            }
+        },{
+            $group:{
+                _id:"$coin",
+                qty:{$sum:"$qty"}
+            }
+        },
+    ], function (err, trans) {
+        let transArr = [];
+        if (err) {
+            return res.status(500).send({message: err.message});
+        }
+        if (trans) {
+            trans.forEach(leave => {
+                transArr.push(leave);
+            });
+        }
+        res.send(transArr);
+     });
+})
+
 module.exports = router;

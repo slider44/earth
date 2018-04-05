@@ -43,6 +43,7 @@
 
                 <ng-container matColumnDef="actions">
                     <mat-header-cell *matHeaderCellDef>
+                        Action 
                         <button class="btn btn-primary btn-sm" (click)="addNew()" matTooltip="Add User" matTooltipPosition="right">
                             <i class="fa fa-user-plus"></i>
                         </button>
@@ -54,7 +55,7 @@
                         <button class="btn btn-danger btn-sm" (click)="deleteItem(i, row._id, row.firstName, row.lastName, row.contact,row.email)" matTooltip="Delete User" matTooltipPosition="above">
                             <i class="fa fa-user-times"></i>
                         </button>
-                        <button class="bt btn-warning btn-sm" (click)="holdings(row)" matTooltip="Crypto Holdings" matTooltipPosition="above">
+                        <button class="bt btn-warning btn-sm" (click)="holdings(row._id)" matTooltip="Crypto Holdings" matTooltipPosition="above">
                             <i class="fa fa-info"></i>
                         </button>
                     </mat-cell>
@@ -79,13 +80,29 @@
         <button class="btn btn-sm btn-primary" (click) = "addTransactionDialog()" matTooltip="Add Transaction" matTooltipPosition="right" color="primary">
             <i class="fa fa-plus"></i>
         </button>
-        <table class="table">
-            <tr>
-                <td>Coin</td>
-                <td>Holding</td>
-                <td>Action</td>
-            </tr>
-        </table>
+        <mat-table #table [dataSource]="transactionList">
+            <ng-container matColumnDef="coin">
+              <mat-header-cell *matHeaderCellDef> Coin </mat-header-cell>
+              <mat-cell *matCellDef="let trans"> {{trans._id}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="holdings">
+              <mat-header-cell *matHeaderCellDef>Holdings</mat-header-cell>
+              <mat-cell *matCellDef="let trans"> {{trans.qty}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="price">
+              <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+              <mat-cell *matCellDef="let trans"></mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+              <mat-cell  *matCellDef="let trans">
+                <button class="btn btn-primary btn-sm" matTooltip="View Transaction" matTooltipPosition="above"><i class = "fa fa-table"></i></button>
+                <button class="btn btn-danger btn-sm" matTooltip="Delete Holding" matTooltipPosition="above"><i class="fa fa-trash"></i></button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedtransColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedtransColumns;"></mat-row>
+        </mat-table>
     </div>
         
 </div>
