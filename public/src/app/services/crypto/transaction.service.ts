@@ -25,13 +25,14 @@ export class TransactionService {
     });
   }
 
-  getTransaction(userId) :Observable<Transaction[]>{
+  getTransaction(userId) :Observable<any>{
     return this._httpClient
-    .get(this.API_URL+"/"+userId)
+    .get(this.API_URL+"/count/"+userId)
     .pipe(
       catchError((error) => this._handleError(error))
     );
   }
+  
   private _handleError(err: HttpErrorResponse | any): Observable<any> {
     const errorMsg = err.message || 'Error: Unable to complete request.';
    
