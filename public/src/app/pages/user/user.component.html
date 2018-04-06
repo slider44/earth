@@ -87,7 +87,7 @@
             </ng-container>
             <ng-container matColumnDef="holdings">
               <mat-header-cell *matHeaderCellDef>Holdings</mat-header-cell>
-              <mat-cell *matCellDef="let trans"> {{trans.qty}} </mat-cell>
+              <mat-cell *matCellDef="let trans"> {{trans.qty|number : '1.1-8'}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="price">
               <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
