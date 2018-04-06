@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { map } from 'rxjs/operator/map';
 import { Coin } from '../../../../models/coin';
-import { Transaction } from '../../../../models/transaction';
+import { Transaction } from '../../../../src/app/models/transaction';
 
 @Component({
   selector: 'app-add-holding-dialog',
@@ -17,13 +17,20 @@ import { Transaction } from '../../../../models/transaction';
 export class AddHoldingDialogComponent implements OnInit {
 
   transaction = new Transaction();
+
+  transaction = new Transaction();
   date = new FormControl(new Date());
   constructor(public dialogRef: MatDialogRef<UserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
+      
     }
 
   ngOnInit() {
     this.transaction.time_stamp = this.date.value;
+  }
+
+  addHolding(){
+    this.dialogRef.close(this.transaction);
   }
 
   addHolding(){

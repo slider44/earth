@@ -1,27 +1,23 @@
-import { Injectable, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Transaction } from '../../models/transaction';
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
+import {Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TransactionService {
   private readonly API_URL = 'http://localhost:1337/transactions';
   dialogData: any;
-  dataChange: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[]>([]);
-  @Input() userId;
   
   constructor(private _httpClient: HttpClient) { }
 
   addTransaction(transaction: Transaction): void{
     this._httpClient.post(this.API_URL + "/" , transaction).subscribe(data => {
-      //this.dialogData = transaction;
-     //console.log("success");
+      this.dialogData = transaction;
+     // this.alert.success('Successfully added', 'Success!' );
       },
       (err: HttpErrorResponse) => {
      // this.alert.error( 'Error occurred', 'Error!');
-     console.log(err);
     });
   }
 

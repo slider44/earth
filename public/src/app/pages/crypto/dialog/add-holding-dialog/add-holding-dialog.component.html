@@ -5,7 +5,7 @@
       <mat-form-field color="primary" class="input-full-width">
         <input matInput placeholder="Coin"name="coin" [(ngModel)]="transaction.coin">
       </mat-form-field>
-      <mat-radio-group name="type" [(ngModel)]="transaction.type_trans">
+      <mat-radio-group name="type" [(ngModel)]="transaction.type">
         <mat-radio-button  value="buy">
           Buy
         </mat-radio-button>
@@ -18,11 +18,6 @@
       </mat-form-field>
       <mat-form-field color="primary" class="input-full-width">
         <input matInput placeholder="Qty" name="qty" [(ngModel)]="transaction.qty">
-      </mat-form-field>
-      <mat-form-field color="primary" class="input-full-width">
-        <input matInput [matDatepicker]="picker1" placeholder="Transaction Date" [(ngModel)]="transaction.time_stamp" [ngModelOptions]="{standalone: true}">
-        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
       </mat-form-field>
     </mat-dialog-content>
     <div mat-dialog-actions>
