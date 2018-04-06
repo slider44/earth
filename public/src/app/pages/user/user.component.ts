@@ -5,8 +5,8 @@ import {HttpClient} from '@angular/common/http';
 import {DataSource} from '@angular/cdk/collections';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { FormControl, Validators } from '@angular/forms';
-//import {Observable} from 'rxjs/Observable';
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
+/* import {Observable} from 'rxjs/Rx'; */
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -16,6 +16,10 @@ import { EditDialogComponent } from './dialogs/edit/edit.dialog.component';
 import { UserService } from '../../services/user/user.service';
 import { EmployeeModel } from '../../models/EmployeeModel';
 import { AddHoldingDialogComponent } from '../crypto/dialog/add-holding-dialog/add-holding-dialog.component';
+
+//import ngrx store libs
+import { Store } from '@ngrx/store';
+import * as fromStore from '../user1/store';
 
 
 @Component({
@@ -36,9 +40,12 @@ export class UserComponent implements OnInit {
   users:Array<EmployeeModel> = [];
   
 
-  constructor(public httpClient: HttpClient,
+  /* constructor(public httpClient: HttpClient,
     public dialog: MatDialog,
-    private _userService: UserService) { }
+    private _userService: UserService) { } */
+    constructor(public httpClient: HttpClient,  private store :  Store<fromStore.UserState>,
+      public dialog: MatDialog,
+      private _userService: UserService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -52,6 +59,9 @@ export class UserComponent implements OnInit {
     const dialogRef = this.dialog.open(AddHoldingDialogComponent, {
       width:"300px"
       //data: {issue: user}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
     });
   }
 
@@ -155,6 +165,11 @@ export class UserComponent implements OnInit {
 
   public loadData() {
     this.userDatabase = new UserService(this.httpClient);
+
+   this.store.select('employees').subscribe(state=>{
+    console.log("Store state: "+state);
+   });
+   
     this.dataSource = new UserDataSource(this.userDatabase, this.paginator, this.sort);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)

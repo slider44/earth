@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { map } from 'rxjs/operator/map';
 import { Coin } from '../../../../models/coin';
+import { Transaction } from '../../../../src/app/models/transaction';
 
 @Component({
   selector: 'app-add-holding-dialog',
@@ -14,16 +15,19 @@ import { Coin } from '../../../../models/coin';
   styleUrls: ['./add-holding-dialog.component.scss']
 })
 export class AddHoldingDialogComponent implements OnInit {
-  coins:Observable<Coin[]>;
-  coinCtrl: FormControl;
-  filteredCoins: Observable<Coin[]>;
+
+  transaction = new Transaction();
 
   constructor(public dialogRef: MatDialogRef<UserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, 
-    private cmcService: CmcService) { 
+    @Inject(MAT_DIALOG_DATA) public data: any) { 
       
     }
+
   ngOnInit() {
+  }
+
+  addHolding(){
+    this.dialogRef.close(this.transaction);
   }
 
   onNoClick(){
