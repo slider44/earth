@@ -33,6 +33,12 @@ export class TransactionService {
     );
   }
   
+  deleteAllTransactionByUser(userId){
+    this._httpClient.delete(this.API_URL + "/" + userId).subscribe(data => {},
+      (err: HttpErrorResponse) => {}
+    );
+  }
+
   private _handleError(err: HttpErrorResponse | any): Observable<any> {
     const errorMsg = err.message || 'Error: Unable to complete request.';
    

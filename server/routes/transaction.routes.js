@@ -19,6 +19,14 @@ router.post("/transactions",(req,res,next)=>{
     });
 });
 
+router.delete("/transactions/:userId",(req,res,next) => {
+    console.log(req.params.userId);
+    Transaction.deleteMany({userID:req.params.userId},(err, data)=>{
+        if(err) return res.json(err)
+        else return res.json(data)
+    })
+});
+
 router.get("/transactions/:userId", (req, res, next) => {
     
     Transaction.find({
