@@ -71,14 +71,13 @@ export class UserComponent implements OnInit {
 
   addTransactionDialog(){
     const dialogRef = this.dialog.open(AddHoldingDialogComponent, {
-      width:"300px",
-      data: {}
+      width:"300px"
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result != null){
         result.userID = this.selectedUserId;
         this._transactionService.addTransaction(result);
-        this.holdings(this.selectedUserId);
+        this.holdings(result.userID);
       }
     });
   }
@@ -115,6 +114,7 @@ export class UserComponent implements OnInit {
         const foundIndex = this.userDatabase.dataChange.value.findIndex(x => x._id === this.id);
         // for delete we use splice in order to remove single object from DataService
         this.userDatabase.dataChange.value.splice(foundIndex, 1);
+        this._transactionService.deleteAllTransactionByUser(id);
         this.loadData();
       }
     });
