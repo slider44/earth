@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, forwardRef } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DatePipe } from '@angular/common';
 import {HttpClientModule,HttpClient} from '@angular/common/http';
@@ -11,7 +11,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
 import { AlertService } from './services/alert/alert.service';
-import{ ToastModule} from 'ng2-toastr/ng2-toastr';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AppRoutingModule } from './/app-routing.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -26,11 +26,25 @@ import { LeaveComponent } from './pages/leaves/leave.component';
 import { LoadingComponent } from './core/loading.component';
 import { CallbackComponent } from './pages/callback/callback.component';
 import { LeaveService } from './services/leave/leave.service';
+import { TransactionService } from './services/crypto/transaction.service';
 import { CryptoComponent } from './pages/crypto/crypto.component';
 import { CmcService } from './services/crypto/cmc.service';
 import { AddHoldingDialogComponent } from './pages/crypto/dialog/add-holding-dialog/add-holding-dialog.component';
-import { TopNavigationComponent } from './navigation/top-navigation/top-navigation.component';
-import { TransactionService } from './services/crypto/transaction.service';
+
+import { StoreModule, MetaReducer, StoreFeatureModule } from '@ngrx/store';
+import { CustomSerializer, appReducers  } from '../app/store';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { reducers, effects } from '../app/pages/user1/store';
+import { UserComponent1Component} from './pages/user1/user1.component';
+
+import { environment } from '../environments/environment';
+
+/* 
+export const metaReducers: MetaReducer <any>[] = !environment.production
+? [] : []; */
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +59,7 @@ import { TransactionService } from './services/crypto/transaction.service';
     CallbackComponent,
     CryptoComponent,
     AddHoldingDialogComponent,
-    TopNavigationComponent
+    UserComponent1Component
   ],
   imports: [
     BrowserModule,
@@ -68,7 +82,10 @@ import { TransactionService } from './services/crypto/transaction.service';
     ReactiveFormsModule,
     MatRadioModule,
     ToastModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forFeature('employees', reducers),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([])
   ],
   entryComponents: [
     AddDialogComponent,
@@ -76,7 +93,15 @@ import { TransactionService } from './services/crypto/transaction.service';
     EditDialogComponent,
     AddHoldingDialogComponent
   ],
-  providers: [UserService,UtilsService,FilterSortService,DatePipe, LeaveService,CmcService, TransactionService],
+  providers: [
+  { provide: forwardRef(()=> { RouterStateSerializer }) , useClass: forwardRef(()=> { CustomSerializer } ) } ,
+  UserService,
+  UtilsService,
+  FilterSortService,
+  DatePipe, LeaveService,
+  CmcService,TransactionService
+  
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

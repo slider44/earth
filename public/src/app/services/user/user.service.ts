@@ -6,7 +6,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { EmployeeModel } from '../../models/EmployeeModel';
-import { isEmpty } from 'rxjs/operators';
+import { isEmpty, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -38,6 +38,10 @@ export class UserService {
       });
   }
 
+  getAllUsersForStore(): Observable<EmployeeModel[]> {
+    return  this.httpClient.get<EmployeeModel[]>(this.API_URL)
+             .pipe(catchError((error: any)=> Observable.throw(error.json()))) 
+   }
   
     // ADD, POST METHOD
     addUser(user: EmployeeModel): void {
