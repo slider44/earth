@@ -5,6 +5,7 @@ var reload = require('reload')
 const path = require("path");
 const cors = require('cors');
 const userroute = require('./server/routes/user.routes');
+const transactionroute = require('./server/routes/transaction.routes');
 //Static Folder
 app.use(express.static(__dirname + '/public/dist'));
 
@@ -46,5 +47,6 @@ mongoose.connect(MONGO_URI);
 
 
 app.use('/', userroute);
+app.use('/',transactionroute);
 
 app.listen(port, () => console.log(`Server running on localhost:${port}`));
