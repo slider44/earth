@@ -40,6 +40,8 @@ import { reducers, effects } from '../app/pages/user1/store';
 import { UserComponent1Component} from './pages/user1/user1.component';
 
 import { environment } from '../environments/environment';
+import { ViewCoinTransactionComponent } from './pages/crypto/dialog/view-coin-transaction/view-coin-transaction.component';
+import { HoldingListComponent } from './pages/crypto/holding-list/holding-list.component';
 
 /* 
 export const metaReducers: MetaReducer <any>[] = !environment.production
@@ -59,7 +61,9 @@ export const metaReducers: MetaReducer <any>[] = !environment.production
     CallbackComponent,
     CryptoComponent,
     AddHoldingDialogComponent,
-    UserComponent1Component
+    UserComponent1Component,
+    ViewCoinTransactionComponent,
+    HoldingListComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +95,8 @@ export const metaReducers: MetaReducer <any>[] = !environment.production
     AddDialogComponent,
     DeleteDialogComponent,
     EditDialogComponent,
-    AddHoldingDialogComponent
+    AddHoldingDialogComponent,
+    ViewCoinTransactionComponent
   ],
   providers: [
   { provide: forwardRef(()=> { RouterStateSerializer }) , useClass: forwardRef(()=> { CustomSerializer } ) } ,

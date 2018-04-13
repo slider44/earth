@@ -19,6 +19,7 @@ import { TransactionService } from '../../services/crypto/transaction.service';
 import { AddHoldingDialogComponent } from '../crypto/dialog/add-holding-dialog/add-holding-dialog.component';
 import { Transaction } from '../../models/transaction';
 import { Subscription } from 'rxjs/Subscription';
+import { ViewCoinTransactionComponent } from '../crypto/dialog/view-coin-transaction/view-coin-transaction.component';
 
 
 @Component({
@@ -36,12 +37,14 @@ export class UserComponent implements OnInit {
   dataSource: UserDataSource | null;
   index: number;
   id: string;
+  userSelected: Boolean;
   selectedUserId: string;
 
   users:Array<EmployeeModel> = [];
 
   transactionListSub: Subscription;
   transactionList: Observable<any>;
+  
 
   constructor(public httpClient: HttpClient,
     public dialog: MatDialog,
@@ -54,12 +57,14 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.userSelected = false;
   }
 
   holdings(userId){
+    this.userSelected = true;
     this.selectedUserId = userId;
     this.transactionListSub = this._transactionService.getTransaction(this.selectedUserId)
-    .subscribe(res=> { this.transactionList = res; 
+    .subscribe(res=> { this.transactionList = res;
       console.log(this.transactionList)
     }, 
       err=> {
@@ -67,6 +72,16 @@ export class UserComponent implements OnInit {
       }
 
     );
+  }
+
+  showCoinTransactionDialog(userId,coin){
+    const dialogRef = this.dialog.open(ViewCoinTransactionComponent, {
+      width:"500px",
+      data: {userId: userId, coin:coin}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.holdings(userId);
+    });
   }
 
   addTransactionDialog(){

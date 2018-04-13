@@ -96,7 +96,7 @@
             <ng-container matColumnDef="action">
               <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
               <mat-cell  *matCellDef="let trans">
-                <button class="btn btn-primary btn-sm" matTooltip="View Transaction" matTooltipPosition="above"><i class = "fa fa-table"></i></button>
+                <button class="btn btn-primary btn-sm" (click) = "showCoinTransactionDialog(selectedUserId, trans._id)" matTooltip="View Transaction" matTooltipPosition="above"><i class = "fa fa-table"></i></button>
                 <button class="btn btn-danger btn-sm" matTooltip="Delete Holding" matTooltipPosition="above"><i class="fa fa-trash"></i></button>
               </mat-cell>
             </ng-container>
