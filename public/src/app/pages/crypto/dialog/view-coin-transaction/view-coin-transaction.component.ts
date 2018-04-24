@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserComponent } from '../../../user/user.component';
 import { TransactionService } from '../../../../services/crypto/transaction.service';
 import { Observable } from 'rxjs/Observable';
+import { ViewHoldingDialogComponent } from '../view-holding-dialog/view-holding-dialog.component';
 
 @Component({
   selector: 'app-view-coin-transaction',
@@ -13,7 +14,7 @@ export class ViewCoinTransactionComponent implements OnInit {
   transactionList: Observable<any>;
   displayedtransColumns=["holdings", "transaction", "price", "date", "action"];
 
-  constructor(public dialogRef: MatDialogRef<UserComponent>,
+  constructor(public dialogRef: MatDialogRef<ViewHoldingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,public _transactionService: TransactionService) { 
     }
 

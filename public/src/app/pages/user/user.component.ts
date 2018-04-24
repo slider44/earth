@@ -1,5 +1,4 @@
 import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
-//import { User } from './user';
 import {MatDialog, MatPaginator, MatSort} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
 import {DataSource} from '@angular/cdk/collections';
@@ -20,6 +19,7 @@ import { AddHoldingDialogComponent } from '../crypto/dialog/add-holding-dialog/a
 import { Transaction } from '../../models/transaction';
 import { Subscription } from 'rxjs/Subscription';
 import { ViewCoinTransactionComponent } from '../crypto/dialog/view-coin-transaction/view-coin-transaction.component';
+import { ViewHoldingDialogComponent } from '../crypto/dialog/view-holding-dialog/view-holding-dialog.component';
 
 
 @Component({
@@ -32,13 +32,11 @@ import { ViewCoinTransactionComponent } from '../crypto/dialog/view-coin-transac
 export class UserComponent implements OnInit {
 
   displayedColumns = ['firstName', 'lastName',  'contact' , 'email', 'actions'];
-  displayedtransColumns=["coin", "holdings", "price", "action"];
   userDatabase: UserService | null;
   dataSource: UserDataSource | null;
   index: number;
   id: string;
-  userSelected: Boolean;
-  selectedUserId: string;
+  selectedUser: EmployeeModel;
 
   users:Array<EmployeeModel> = [];
 
@@ -57,43 +55,12 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    this.userSelected = false;
   }
 
-  holdings(userId){
-    this.userSelected = true;
-    this.selectedUserId = userId;
-    this.transactionListSub = this._transactionService.getTransaction(this.selectedUserId)
-    .subscribe(res=> { this.transactionList = res;
-      console.log(this.transactionList)
-    }, 
-      err=> {
-        console.error(err);
-      }
-
-    );
-  }
-
-  showCoinTransactionDialog(userId,coin){
-    const dialogRef = this.dialog.open(ViewCoinTransactionComponent, {
+  holdings(user){
+    const dialogRef = this.dialog.open(ViewHoldingDialogComponent, {
       width:"500px",
-      data: {userId: userId, coin:coin}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.holdings(userId);
-    });
-  }
-
-  addTransactionDialog(){
-    const dialogRef = this.dialog.open(AddHoldingDialogComponent, {
-      width:"300px"
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != null){
-        result.userID = this.selectedUserId;
-        this._transactionService.addTransaction(result);
-        this.holdings(result.userID);
-      }
+      data: {user: user}
     });
   }
 

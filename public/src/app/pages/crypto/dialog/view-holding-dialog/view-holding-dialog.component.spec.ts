@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HoldingListComponent } from './holding-list.component';
+import { ViewHoldingDialogComponent } from './view-holding-dialog.component';
 
-describe('HoldingListComponent', () => {
-  let component: HoldingListComponent;
-  let fixture: ComponentFixture<HoldingListComponent>;
+describe('ViewHoldingDialogComponent', () => {
+  let component: ViewHoldingDialogComponent;
+  let fixture: ComponentFixture<ViewHoldingDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HoldingListComponent ]
+      declarations: [ ViewHoldingDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HoldingListComponent);
+    fixture = TestBed.createComponent(ViewHoldingDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

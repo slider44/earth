@@ -41,8 +41,8 @@ import { UserComponent1Component} from './pages/user1/user1.component';
 
 import { environment } from '../environments/environment';
 import { ViewCoinTransactionComponent } from './pages/crypto/dialog/view-coin-transaction/view-coin-transaction.component';
-import { HoldingListComponent } from './pages/crypto/holding-list/holding-list.component';
-
+import { DeleteTransactionDialogComponent } from './pages/crypto/dialog/delete-transaction-dialog/delete-transaction-dialog.component';
+import { ViewHoldingDialogComponent } from './pages/crypto/dialog/view-holding-dialog/view-holding-dialog.component';
 /* 
 export const metaReducers: MetaReducer <any>[] = !environment.production
 ? [] : []; */
@@ -63,7 +63,8 @@ export const metaReducers: MetaReducer <any>[] = !environment.production
     AddHoldingDialogComponent,
     UserComponent1Component,
     ViewCoinTransactionComponent,
-    HoldingListComponent
+    DeleteTransactionDialogComponent,
+    ViewHoldingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +97,8 @@ export const metaReducers: MetaReducer <any>[] = !environment.production
     DeleteDialogComponent,
     EditDialogComponent,
     AddHoldingDialogComponent,
-    ViewCoinTransactionComponent
+    ViewCoinTransactionComponent,
+    ViewHoldingDialogComponent
   ],
   providers: [
   { provide: forwardRef(()=> { RouterStateSerializer }) , useClass: forwardRef(()=> { CustomSerializer } ) } ,

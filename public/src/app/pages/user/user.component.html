@@ -1,5 +1,5 @@
 <div class="row">
-    <div class = "col-md-8">
+    <div class = "col-md-12">
         <mat-toolbar color="primary">
             <span>Teammates</span>
             <span class="spacer"></span>
@@ -55,7 +55,7 @@
                         <button class="btn btn-danger btn-sm" (click)="deleteItem(i, row._id, row.firstName, row.lastName, row.contact,row.email)" matTooltip="Delete User" matTooltipPosition="above">
                             <i class="fa fa-user-times"></i>
                         </button>
-                        <button class="bt btn-warning btn-sm" (click)="holdings(row._id)" matTooltip="Crypto Holdings" matTooltipPosition="above">
+                        <button class="bt btn-warning btn-sm" (click)="holdings(row)" matTooltip="Crypto Holdings" matTooltipPosition="above">
                             <i class="fa fa-info"></i>
                         </button>
                     </mat-cell>
@@ -73,36 +73,38 @@
             </mat-paginator>
         </div>
     </div>
-    <div class = "col-md-4">
+    
+    <!--<div class = "col-md-4">
         <mat-toolbar color="primary">
-            <span>Holdings</span>
+            {{selectedUser|json}}
         </mat-toolbar>
+        {{selectedUser|json}}
         <button class="btn btn-sm btn-primary" (click) = "addTransactionDialog()" matTooltip="Add Transaction" matTooltipPosition="right" color="primary">
             <i class="fa fa-plus"></i>
         </button>
         <mat-table #table [dataSource]="transactionList">
             <ng-container matColumnDef="coin">
-              <mat-header-cell *matHeaderCellDef> Coin </mat-header-cell>
-              <mat-cell *matCellDef="let trans"> {{trans._id}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef> Coin </mat-header-cell>
+                <mat-cell *matCellDef="let trans"> {{trans._id}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="holdings">
-              <mat-header-cell *matHeaderCellDef>Holdings</mat-header-cell>
-              <mat-cell *matCellDef="let trans"> {{trans.qty|number : '1.1-8'}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef>Holdings</mat-header-cell>
+            <mat-cell *matCellDef="let trans"> {{trans.qty|number : '1.1-8'}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="price">
-              <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-              <mat-cell *matCellDef="let trans"></mat-cell>
+            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+            <mat-cell *matCellDef="let trans"></mat-cell>
             </ng-container>
             <ng-container matColumnDef="action">
-              <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
-              <mat-cell  *matCellDef="let trans">
+            <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+            <mat-cell  *matCellDef="let trans">
                 <button class="btn btn-primary btn-sm" (click) = "showCoinTransactionDialog(selectedUserId, trans._id)" matTooltip="View Transaction" matTooltipPosition="above"><i class = "fa fa-table"></i></button>
                 <button class="btn btn-danger btn-sm" matTooltip="Delete Holding" matTooltipPosition="above"><i class="fa fa-trash"></i></button>
-              </mat-cell>
+            </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedtransColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedtransColumns;"></mat-row>
         </mat-table>
-    </div>
+    </div>-->
         
 </div>
