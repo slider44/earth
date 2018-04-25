@@ -1,24 +1,26 @@
-import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-//import { User } from './user';
-import { MatDialog, MatPaginator, MatSort } from "@angular/material";
-import { HttpClient } from "@angular/common/http";
-import { DataSource } from "@angular/cdk/collections";
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { FormControl, Validators } from "@angular/forms";
-import { Observable } from "rxjs/Observable";
-/* import {Observable} from 'rxjs/Rx'; */
-import "rxjs/add/observable/merge";
-import "rxjs/add/operator/debounceTime";
-import "rxjs/add/operator/distinctUntilChanged";
-import { AddDialogComponent } from "./dialogs/add/add.dialog.component";
-import { DeleteDialogComponent } from "./dialogs/delete/delete.dialog.component";
-import { EditDialogComponent } from "./dialogs/edit/edit.dialog.component";
-import { UserService } from "../../services/user/user.service";
-import { EmployeeModel } from "../../models/EmployeeModel";
-import { TransactionService } from "../../services/crypto/transaction.service";
-import { AddHoldingDialogComponent } from "../crypto/dialog/add-holding-dialog/add-holding-dialog.component";
-import { Transaction } from "../../models/transaction";
-import { Subscription } from "rxjs/Subscription";
+import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
+import {MatDialog, MatPaginator, MatSort} from '@angular/material';
+import {HttpClient} from '@angular/common/http';
+import {DataSource} from '@angular/cdk/collections';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { FormControl, Validators } from '@angular/forms';
+//import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import { AddDialogComponent } from './dialogs/add/add.dialog.component';
+import { DeleteDialogComponent } from './dialogs/delete/delete.dialog.component';
+import { EditDialogComponent } from './dialogs/edit/edit.dialog.component';
+import { UserService } from '../../services/user/user.service';
+import { EmployeeModel } from '../../models/EmployeeModel';
+import { TransactionService } from '../../services/crypto/transaction.service';
+import { AddHoldingDialogComponent } from '../crypto/dialog/add-holding-dialog/add-holding-dialog.component';
+import { Transaction } from '../../models/transaction';
+import { Subscription } from 'rxjs/Subscription';
+import { ViewCoinTransactionComponent } from '../crypto/dialog/view-coin-transaction/view-coin-transaction.component';
+import { ViewHoldingDialogComponent } from '../crypto/dialog/view-holding-dialog/view-holding-dialog.component';
+
 
 @Component({
   selector: "app-user",
@@ -26,28 +28,24 @@ import { Subscription } from "rxjs/Subscription";
   styleUrls: ["./user.component.scss"]
 })
 export class UserComponent implements OnInit {
-  displayedColumns = ["firstName", "lastName", "contact", "email", "actions"];
-  displayedtransColumns = ["coin", "holdings", "price", "action"];
+
+  displayedColumns = ['firstName', 'lastName',  'contact' , 'email', 'actions'];
   userDatabase: UserService | null;
   dataSource: UserDataSource | null;
   index: number;
   id: string;
-  selectedUserId: string;
+  selectedUser: EmployeeModel;
 
   users: Array<EmployeeModel> = [];
 
   transactionListSub: Subscription;
   transactionList: Observable<any>;
+  
 
-  /* constructor(public httpClient: HttpClient,
-    public dialog: MatDialog,
-    private _userService: UserService) { } */
-  constructor(
-    public httpClient: HttpClient,
+  constructor(public httpClient: HttpClient,
     public dialog: MatDialog,
     private _userService: UserService,
-    private _transactionService: TransactionService
-  ) {}
+    private _transactionService: TransactionService) { }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -57,35 +55,10 @@ export class UserComponent implements OnInit {
     this.loadData();
   }
 
-  holdings(userId) {
-    this.selectedUserId = userId;
-    this.transactionListSub = this._transactionService
-      .getTransaction(this.selectedUserId)
-      .subscribe(
-        res => {
-          this.transactionList = res;
-          console.log(this.transactionList);
-        },
-        err => {
-          console.error(err);
-        }
-      );
-  }
-
-  addTransactionDialog() {
-    const dialogRef = this.dialog.open(AddHoldingDialogComponent, {
-      width: "300px",
-      data: {}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result != null) {
-        result.userID = this.selectedUserId;
-        this._transactionService.addTransaction(result);
-        this.holdings(this.selectedUserId);
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+  holdings(user){
+    const dialogRef = this.dialog.open(ViewHoldingDialogComponent, {
+      width:"500px",
+      data: {user: user}
     });
   }
 
@@ -136,6 +109,7 @@ export class UserComponent implements OnInit {
         );
         // for delete we use splice in order to remove single object from DataService
         this.userDatabase.dataChange.value.splice(foundIndex, 1);
+        this._transactionService.deleteAllTransactionByUser(id);
         this.loadData();
       }
     });
@@ -220,13 +194,8 @@ export class UserComponent implements OnInit {
 
   public loadData() {
     this.userDatabase = new UserService(this.httpClient);
-
-    this.dataSource = new UserDataSource(
-      this.userDatabase,
-      this.paginator,
-      this.sort
-    );
-    Observable.fromEvent(this.filter.nativeElement, "keyup")
+    this.dataSource = new UserDataSource(this.userDatabase, this.paginator, this.sort);
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
       .subscribe(() => {

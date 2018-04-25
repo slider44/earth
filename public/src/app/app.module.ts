@@ -44,6 +44,7 @@ import { CmcService } from "./services/crypto/cmc.service";
 import { AddHoldingDialogComponent } from "./pages/crypto/dialog/add-holding-dialog/add-holding-dialog.component";
 import { User1Component } from "./pages/user1/user1.component";
 
+<<<<<<< HEAD
 import { reducers } from "./pages/user1/store/reducers";
 import { effects } from "./pages/user1/store/effects";
 import { StoreModule, StoreFeatureModule } from "@ngrx/store";
@@ -63,6 +64,20 @@ import { environment } from "../environments/environment";
 import { ViewCoinTransactionComponent } from "./pages/crypto/dialog/view-coin-transaction/view-coin-transaction.component";
 import { DeleteTransactionDialogComponent } from "./pages/crypto/dialog/delete-transaction-dialog/delete-transaction-dialog.component";
 import { ViewHoldingDialogComponent } from "./pages/crypto/dialog/view-holding-dialog/view-holding-dialog.component";
+=======
+import { StoreModule, MetaReducer, StoreFeatureModule } from '@ngrx/store';
+import { CustomSerializer, appReducers  } from '../app/store';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { reducers, effects } from '../app/pages/user1/store';
+import { UserComponent1Component} from './pages/user1/user1.component';
+
+import { environment } from '../environments/environment';
+import { ViewCoinTransactionComponent } from './pages/crypto/dialog/view-coin-transaction/view-coin-transaction.component';
+import { DeleteTransactionDialogComponent } from './pages/crypto/dialog/delete-transaction-dialog/delete-transaction-dialog.component';
+import { ViewHoldingDialogComponent } from './pages/crypto/dialog/view-holding-dialog/view-holding-dialog.component';
+>>>>>>> 29c7dbda72fd95857f1f143dab0a624d093a2254
 /* 
 export const metaReducers: MetaReducer <any>[] = !environment.production
 ? [] : []; */
@@ -81,7 +96,11 @@ export const metaReducers: MetaReducer <any>[] = !environment.production
     CallbackComponent,
     CryptoComponent,
     AddHoldingDialogComponent,
+<<<<<<< HEAD
     User1Component,
+=======
+    UserComponent1Component,
+>>>>>>> 29c7dbda72fd95857f1f143dab0a624d093a2254
     ViewCoinTransactionComponent,
     DeleteTransactionDialogComponent,
     ViewHoldingDialogComponent

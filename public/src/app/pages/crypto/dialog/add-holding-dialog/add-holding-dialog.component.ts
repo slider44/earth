@@ -26,6 +26,9 @@ import { map } from 'rxjs/operator/map';
 import { Coin } from '../../../../models/coin';
 import { Transaction } from '../../../../models/transaction';
 import { ViewHoldingDialogComponent } from '../view-holding-dialog/view-holding-dialog.component';
+<<<<<<< HEAD
+>>>>>>> 29c7dbda72fd95857f1f143dab0a624d093a2254
+=======
 >>>>>>> 29c7dbda72fd95857f1f143dab0a624d093a2254
 
 @Component({
@@ -36,6 +39,7 @@ import { ViewHoldingDialogComponent } from '../view-holding-dialog/view-holding-
 export class AddHoldingDialogComponent implements OnInit {
   transaction = new Transaction();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   date = new FormControl(new Date());
   constructor(
@@ -44,6 +48,9 @@ export class AddHoldingDialogComponent implements OnInit {
   ) {}
 =======
   date = new FormControl(new Date());
+=======
+  date = new FormControl(new Date());
+>>>>>>> 29c7dbda72fd95857f1f143dab0a624d093a2254
   constructor(public dialogRef: MatDialogRef<ViewHoldingDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       
@@ -60,12 +67,15 @@ export class AddHoldingDialogComponent implements OnInit {
     this.dialogRef.close(this.transaction);
   }
 
+<<<<<<< HEAD
   onNoClick() {
 =======
   addHolding(){
     this.dialogRef.close(this.transaction);
   }
 
+=======
+>>>>>>> 29c7dbda72fd95857f1f143dab0a624d093a2254
   onNoClick(){
 >>>>>>> 29c7dbda72fd95857f1f143dab0a624d093a2254
     this.dialogRef.close();
