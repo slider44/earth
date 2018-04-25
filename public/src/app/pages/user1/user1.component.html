@@ -1,91 +1,90 @@
 <div class="row">
-  <div class = "col-md-8">
-      <mat-toolbar color="primary">
-          <span>Teammates</span>
-          <span class="spacer"></span>
-          Reload data:
-          <button mat-icon-button (click)="loadData()">
-              <mat-icon>refresh</mat-icon>
-          </button>
-      </mat-toolbar>
+    <div class="col-md-8">
+        <mat-toolbar color="primary">
+            <span>Teammates</span>
+            <span class="spacer"></span>
+            Reload data:
+            <button mat-icon-button (click)="loadData()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </mat-toolbar>
 
-      <div class="col-md-12 mat-elevation-z8">
-          <div class="form">
-              <mat-form-field floatPlaceholder="never" color="accent">
-                  <input matInput #filter placeholder="Filter issues">
-              </mat-form-field>
-          </div>
+        <div class="col-md-12 mat-elevation-z8">
+            <div class="form">
+                <mat-form-field floatPlaceholder="never" color="accent">
+                    <input matInput #filter placeholder="Filter issues">
+                </mat-form-field>
+            </div>
 
-          <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
-              <!--- Note that these columns can be defined in any order.
+            <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+                <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
-              <ng-container matColumnDef="firstName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>FIRST NAME</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.firstName}}</mat-cell>
-              </ng-container>
+                <ng-container matColumnDef="firstName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>FIRST NAME</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.firstName}}</mat-cell>
+                </ng-container>
 
-              <ng-container matColumnDef="lastName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header >LAST NAME</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.lastName}}</mat-cell>
-              </ng-container>
+                <ng-container matColumnDef="lastName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>LAST NAME</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.lastName}}</mat-cell>
+                </ng-container>
 
-              <ng-container matColumnDef="contact">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>CONTACT</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.contact}}</mat-cell>
-              </ng-container>
+                <ng-container matColumnDef="contact">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>CONTACT</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.contact}}</mat-cell>
+                </ng-container>
 
 
-              <ng-container matColumnDef="email">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>EMAIL</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> {{row.email}}</mat-cell>
-              </ng-container>
+                <ng-container matColumnDef="email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>EMAIL</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.email}}</mat-cell>
+                </ng-container>
 
-              <ng-container matColumnDef="actions">
-                  <mat-header-cell *matHeaderCellDef>
-                      <!--<button mat-icon-button color="primary" (click)="addNew()" matTooltip="Add User" matTooltipPosition="right">
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef>
+                        <!--<button mat-icon-button color="primary" (click)="addNew()" matTooltip="Add User" matTooltipPosition="right">
                           <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
                       </button>-->
-                      <button class="btn btn-primary btn-sm" (click)="addNew()" matTooltip="Add User" matTooltipPosition="right">
-                          <i class="fa fa-user-plus"></i>
-                      </button>
-                  </mat-header-cell>
+                        <button class="btn btn-primary btn-sm" (click)="addNew()" matTooltip="Add User" matTooltipPosition="right">
+                            <i class="fa fa-user-plus"></i>
+                        </button>
+                    </mat-header-cell>
 
-                  <mat-cell *matCellDef="let row; let i=index;">
-                      <button class="btn btn-primary btn-sm" (click)="startEdit(i, row._id, row.firstName, row.lastName, row.contact, row.email)" matTooltip="Edit User" matTooltipPosition="left">
-                          <i class="fa fa-user-circle"></i>
-                      </button>
-                      <button class="btn btn-danger btn-sm" (click)="deleteItem(i, row._id, row.firstName, row.lastName, row.contact,row.email)" matTooltip="Delete User" matTooltipPosition="right">
-                          <i class="fa fa-user-times"></i>
-                      </button>
-                  </mat-cell>
-              </ng-container>
+                    <mat-cell *matCellDef="let row; let i=index;">
+                        <button class="btn btn-primary btn-sm" (click)="startEdit(i, row._id, row.firstName, row.lastName, row.contact, row.email)"
+                            matTooltip="Edit User" matTooltipPosition="left">
+                            <i class="fa fa-user-circle"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteItem(i, row._id, row.firstName, row.lastName, row.contact,row.email)"
+                            matTooltip="Delete User" matTooltipPosition="right">
+                            <i class="fa fa-user-times"></i>
+                        </button>
+                    </mat-cell>
+                </ng-container>
 
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
 
-          <mat-paginator #paginator
-              [length]="dataSource.filteredData.length"
-              [pageIndex]="0"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
-          </mat-paginator>
-      </div>
-  </div>
-  <div class = "col-md-4">
-      <mat-toolbar color="primary">
-          <span>Holdings</span>
-      </mat-toolbar>
-      <button class="btn btn-sm btn-primary" (click) = "addTransactionDialog()" matTooltip="Add Transaction" matTooltipPosition="right" color="primary">
-          <i class="fa fa-plus"></i>
-      </button>
-      <table class="table">
-          <tr>
-              <td>Coin</td>
-              <td>Holding</td>
-              <td>Action</td>
-          </tr>
-      </table>
-  </div>
+            <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <mat-toolbar color="primary">
+            <span>Holdings</span>
+        </mat-toolbar>
+        <button class="btn btn-sm btn-primary" (click)="addTransactionDialog()" matTooltip="Add Transaction" matTooltipPosition="right"
+            color="primary">
+            <i class="fa fa-plus"></i>
+        </button>
+        <table class="table">
+            <tr>
+                <td>Coin</td>
+                <td>Holding</td>
+                <td>Action</td>
+            </tr>
+        </table>
+    </div>
 </div>

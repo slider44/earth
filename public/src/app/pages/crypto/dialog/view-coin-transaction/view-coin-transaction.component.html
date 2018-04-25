@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <h3 mat-dialog-title>View Transaction</h3>
+  <mat-table #table [dataSource]="transactionList">
+      <ng-container matColumnDef="holdings">
+        <mat-header-cell *matHeaderCellDef>Holdings</mat-header-cell>
+        <mat-cell *matCellDef="let trans"> {{trans.qty|number : '1.0-8'}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="price">
+        <mat-header-cell *matHeaderCellDef> Price</mat-header-cell>
+        <mat-cell *matCellDef="let trans">{{trans.price}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="transaction">
+          <mat-header-cell *matHeaderCellDef> Transaction</mat-header-cell>
+          <mat-cell *matCellDef="let trans">{{trans.type_trans}}</mat-cell>
+        </ng-container>
+      <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef> Date</mat-header-cell>
+          <mat-cell *matCellDef="let trans">{{trans.time_stamp}}</mat-cell>
+        </ng-container>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
+        <mat-cell  *matCellDef="let trans">
+          <button class="btn btn-primary btn-sm" matTooltip="Edit Transaction" (click) = "edit(trans._id)" matTooltipPosition="above"><i class="fa fa-edit"></i></button>
+          <button class="btn btn-danger btn-sm" matTooltip="Delete Transaction" (click) = "delete(trans._id)" matTooltipPosition="above"><i class="fa fa-trash"></i></button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedtransColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedtransColumns;"></mat-row>
+  </mat-table>
+</div>

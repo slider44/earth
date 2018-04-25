@@ -1,5 +1,5 @@
-import { EmployeesEffect } from './employee.effect';
+import { EmployeesEffect } from "./employee.effect";
 
-export const effects : any[] = [EmployeesEffect];
+export const effects: any[] = [EmployeesEffect];
 
-export * from './employee.effect';
+export * from "./employee.effect";
